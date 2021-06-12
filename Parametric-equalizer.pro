@@ -9,7 +9,7 @@ QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = EQFilterGroup
+TARGET = equalizer
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -79,4 +79,7 @@ FORMS += \
 
 INCLUDEPATH += $$PWD/bandpassFilter
 DEPENDPATH += $$PWD/bandpassFilter
+
+RESOURCES += \
+    icon.qrc
 

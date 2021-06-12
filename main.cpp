@@ -4,6 +4,7 @@
 #include <QAudioOutput>
 #include <QUrl>
 #include <QBuffer>
+#include <QIcon>
 #include <QDesktopWidget>
 
 #include "AudioPlayer.h"
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Widget app;
     QDesktopWidget *desktop = QApplication::desktop();
+    app.setWindowIcon(QIcon(":/icon/eq.png"));
     app.move((desktop->width() - app.width()) / 2, (desktop->height() - app.height()) / 2);
     app.show();
     return a.exec();

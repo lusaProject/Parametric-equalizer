@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/eq.png</file>
+    </qresource>
+</RCC>
