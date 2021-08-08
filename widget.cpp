@@ -192,6 +192,10 @@ void Widget::on_comboBox_currentIndexChanged(int index)
 {
     musicStyle.clear();
 
+    ui->comboBox_2->blockSignals(true);
+    ui->comboBox_2->setCurrentIndex(-1);
+    ui->comboBox_2->blockSignals(false);
+
     if (bandwidthStatus == 2) {
         setBandpassFrequency(1);
     }
@@ -542,6 +546,11 @@ void Widget::on_lineEdit_20_editingFinished()
 void Widget::on_comboBox_2_currentIndexChanged(int index)
 {
     musicStyle.clear();
+
+    // blockSignals
+    ui->comboBox->blockSignals(true);
+    ui->comboBox->setCurrentIndex(-1);
+    ui->comboBox->blockSignals(false);
 
     if (bandwidthStatus == 1) {
         setBandpassFrequency(2);
