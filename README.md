@@ -236,8 +236,8 @@ void EQFilterGroup::filterCoefficient(double Fc01, double Fc02, double b[])
 ```c++
 float EQFilterGroup::band_filter_channel(float invar, float initval, int setic)
 {
-    float sumnum = 0.0;
-    static float states[99] = {0};
+    float sumnum = 0.0f;
+    static float states[100] = {0.0f}; 
 
     float znum[100] = {
     0.001361345398931, 0.0007361591105546, -0.002775009118357, 0.006304868331772,
@@ -264,18 +264,20 @@ float EQFilterGroup::band_filter_channel(float invar, float initval, int setic)
     -0.002472950918829, -0.003861909443325, -0.0001962141514101, 0.002945009923102,
     0.001729067206534, -0.0003263851063626, -9.969769896632e-05, 0.0003625284111798,
     -0.0007378443913672, -0.001453722777184, -0.0002770112131964, 0.001040452262413,
-    0.0007788265053118, -7.741730824063e-05, -9.112622961418e-05, 0.000187889002521
-        
+    0.0007788265053118, -7.741730824063e-05, -9.112622961418e-05, 0.000187889002521 
     };
 
-    for (int i = 0; i < 99; i++) {
-        sumnum += states[i] * znum[i];
-        if (i < 98)
-            states[i] = states[i + 1];
+    // 滤波器计算
+    for (int i = 99; i > 0; --i) {
+        states[i] = states[i - 1]; // 左移历史状态
     }
-    states[98] = invar;
-    sumnum += states[98] * znum[0];
-    return sumnum * 0.4;
+    states[0] = invar; // 更新最新输入值
+
+    for (int i = 0; i < 100; ++i) {
+        sumnum += states[i] * znum[i]; // 滤波器卷积计算
+    }
+
+    return sumnum * 0.4f; // 输出加权结果
 }
 
 ```
